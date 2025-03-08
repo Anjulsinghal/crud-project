@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost:27017/optionDataDB')
 const sampleData = [
   {
     Ticker: "NIFTY10000DEC22PE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "13:37",
     Open: 9.35,
     High: 9.35,
@@ -23,7 +23,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY10000DEC22PE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "09:15",
     Open: 9.40,
     High: 9.55,
@@ -34,7 +34,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY10000DEC22PE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "15:30",
     Open: 9.45,
     High: 9.65,
@@ -45,7 +45,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY10000DEC22CE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "13:45",
     Open: 185.60,
     High: 186.75,
@@ -56,7 +56,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY10000DEC22CE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "09:20",
     Open: 186.10,
     High: 188.45,
@@ -67,7 +67,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY9500DEC22PE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "10:30",
     Open: 6.75,
     High: 6.90,
@@ -78,7 +78,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY9500DEC22PE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "14:15",
     Open: 6.90,
     High: 7.10,
@@ -89,7 +89,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY9500DEC22CE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "11:20",
     Open: 245.30,
     High: 247.15,
@@ -100,7 +100,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY9500DEC22CE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "13:10",
     Open: 246.80,
     High: 248.50,
@@ -111,7 +111,7 @@ const sampleData = [
   },
   {
     Ticker: "BANKNIFTY35000DEC22PE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "12:45",
     Open: 12.15,
     High: 12.40,
@@ -122,7 +122,7 @@ const sampleData = [
   },
   {
     Ticker: "BANKNIFTY35000DEC22PE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "10:50",
     Open: 12.35,
     High: 12.60,
@@ -133,7 +133,7 @@ const sampleData = [
   },
   {
     Ticker: "BANKNIFTY35000DEC22CE",
-    Date: "20220210",
+    Date: "2022/02/10",
     Time: "14:05",
     Open: 275.65,
     High: 278.30,
@@ -144,7 +144,7 @@ const sampleData = [
   },
   {
     Ticker: "BANKNIFTY35000DEC22CE",
-    Date: "20220211",
+    Date: "2022/02/11",
     Time: "15:15",
     Open: 277.60,
     High: 280.45,
@@ -155,7 +155,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY10000DEC22PE",
-    Date: "20220212",
+    Date: "2022/02/12",
     Time: "10:00",
     Open: 9.65,
     High: 9.80,
@@ -166,7 +166,7 @@ const sampleData = [
   },
   {
     Ticker: "NIFTY9500DEC22CE",
-    Date: "20220212",
+    Date: "2022/02/12",
     Time: "11:45",
     Open: 248.10,
     High: 250.35,

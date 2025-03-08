@@ -162,7 +162,6 @@ export const OptionProvider = ({ children }) => {
     </OptionContext.Provider>
   );
 };
-
 // Custom hook to use the option context
 export const useOption = () => {
   const context = useContext(OptionContext);

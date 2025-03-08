@@ -20,7 +20,7 @@ const OptionTable = ({ onEditRecord }) => {
     
     setDeletingId(null);
   };
-
+  
   if (loading) {
     return <LoadingSpinner />;
   }

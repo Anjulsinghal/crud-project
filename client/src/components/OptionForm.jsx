@@ -128,7 +128,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             value={formData.Date}
             onChange={handleInputChange}
             required
-            placeholder="YYYYMMDD"
+            placeholder="YYYY/MM/DD"
           />
         </div>
         <div className="form-group">
