@@ -15,12 +15,19 @@ const initialFormState = {
 
 const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
   const [formData, setFormData] = useState(initialFormState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState(null); // 'success' or 'error'
   const { createRecord, updateRecord } = useOption();
 
   // Set form data when a record is selected for editing
   useEffect(() => {
     if (recordToEdit) {
       setFormData(recordToEdit);
+      // Scroll to form when editing
+      document.querySelector('.form-container').scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     } else {
       setFormData(initialFormState);
     }
@@ -40,19 +47,30 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus(null);
+    
     try {
       if (recordToEdit) {
         await updateRecord(recordToEdit._id, formData);
       } else {
         await createRecord(formData);
       }
-      // Reset form
+      
+      // Reset form and show success message
       setFormData(initialFormState);
       if (setRecordToEdit) {
         setRecordToEdit(null);
       }
+      setFormStatus('success');
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => setFormStatus(null), 3000);
+      
     } catch (error) {
-      // Error is handled in the context
+      setFormStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -67,6 +85,29 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
   return (
     <div className="form-container">
       <h2>{recordToEdit ? 'Update Record' : 'Create New Record'}</h2>
+      
+      {formStatus === 'success' && (
+        <div className="success-message" style={{
+          backgroundColor: 'rgba(56, 176, 0, 0.1)',
+          color: '#38b000',
+          padding: '1rem',
+          borderRadius: '8px',
+          marginBottom: '1rem',
+          animation: 'fadeIn 0.3s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          {recordToEdit ? 'Record updated successfully!' : 'Record created successfully!'}
+        </div>
+      )}
+      
+      {formStatus === 'error' && (
+        <div className="error-message">
+          An error occurred. Please try again.
+        </div>
+      )}
+      
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Ticker:</label>
@@ -76,6 +117,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             value={formData.Ticker}
             onChange={handleInputChange}
             required
+            placeholder="Enter ticker symbol"
           />
         </div>
         <div className="form-group">
@@ -109,6 +151,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             onChange={handleInputChange}
             required
             step="0.01"
+            placeholder="0.00"
           />
         </div>
         <div className="form-group">
@@ -120,6 +163,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             onChange={handleInputChange}
             required
             step="0.01"
+            placeholder="0.00"
           />
         </div>
         <div className="form-group">
@@ -131,6 +175,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             onChange={handleInputChange}
             required
             step="0.01"
+            placeholder="0.00"
           />
         </div>
         <div className="form-group">
@@ -142,6 +187,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             onChange={handleInputChange}
             required
             step="0.01"
+            placeholder="0.00"
           />
         </div>
         <div className="form-group">
@@ -152,6 +198,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             value={formData.Volume}
             onChange={handleInputChange}
             required
+            placeholder="0"
           />
         </div>
         <div className="form-group">
@@ -162,14 +209,52 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
             value={formData.OI}
             onChange={handleInputChange}
             required
+            placeholder="0"
           />
         </div>
-        <button type="submit">{recordToEdit ? 'Update' : 'Create'}</button>
-        {recordToEdit && (
-          <button type="button" onClick={handleCancel}>
-            Cancel
+        <div className="form-actions" style={{ gridColumn: '1 / -1', marginTop: '1rem' }}>
+          <button 
+            type="submit" 
+            disabled={isSubmitting}
+            style={{ position: 'relative', overflow: 'hidden' }}
+          >
+            {isSubmitting ? (
+              <>
+                <span style={{ visibility: 'hidden' }}>
+                  {recordToEdit ? 'Update' : 'Create'}
+                </span>
+                <span style={{ 
+                  position: 'absolute',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: '100%'
+                }}>
+                  <span style={{ 
+                    width: '16px', 
+                    height: '16px', 
+                    border: '2px solid rgba(255,255,255,0.3)',
+                    borderTopColor: 'white',
+                    borderRadius: '50%',
+                    animation: 'spin 0.8s linear infinite'
+                  }}></span>
+                </span>
+              </>
+            ) : (
+              recordToEdit ? 'Update Record' : 'Create Record'
+            )}
           </button>
-        )}
+          {recordToEdit && (
+            <button 
+              type="button" 
+              onClick={handleCancel}
+              style={{ backgroundColor: '#6c757d' }}
+            >
+              Cancel
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
