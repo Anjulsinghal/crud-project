@@ -69,20 +69,21 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-8 mb-8 shadow-lg card-hover form-container animate-slideInRight">
-      <h2 className="text-dark font-bold mb-6 text-2xl relative inline-block">
+    <div className="bg-white rounded-xl p-8 mb-8 shadow-md transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px] form-container animate-slideInRight group relative">
+      <div className="absolute top-0 left-0 w-full h-1 bg-[#1e3a8a] transform origin-left transition-transform scale-x-100"></div>
+      <h2 className="text-[#1e3a8a] font-bold mb-6 text-2xl relative inline-block group-hover:text-[#2563eb]">
         {recordToEdit ? 'Update Record' : 'Create New Record'}
-        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary rounded scale-x-60 origin-left transition-transform duration-300"></span>
+        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#2563eb] rounded scale-x-60 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
       </h2>
       
       {formStatus === 'success' && (
-        <div className="bg-success/10 text-success p-4 rounded-lg mb-4 animate-fadeIn flex items-center justify-center">
+        <div className="bg-green-100 text-green-800 p-4 rounded-lg mb-4 animate-fadeIn flex items-center justify-center">
           {recordToEdit ? 'Record updated successfully!' : 'Record created successfully!'}
         </div>
       )}
       
       {formStatus === 'error' && (
-        <div className="bg-danger/10 text-danger p-4 rounded-lg mb-4 animate-shake">
+        <div className="bg-red-100 text-red-800 p-4 rounded-lg mb-4 animate-shake">
           An error occurred. Please try again.
         </div>
       )}
@@ -109,7 +110,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
               required
               placeholder={field.placeholder}
               step={field.step}
-              className="w-full p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-light hover:border-primary focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15"
+              className="w-full p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-white hover:border-[#2563eb] focus:outline-none focus:border-[#1e3a8a] focus:ring-3 focus:ring-[#1e3a8a]/15"
             />
           </div>
         ))}
@@ -118,7 +119,7 @@ const OptionForm = ({ recordToEdit, setRecordToEdit }) => {
           <button 
             type="submit" 
             disabled={isSubmitting}
-            className="bg-primary text-white py-3 px-6 mr-4 rounded-lg text-sm font-semibold transition-all duration-300 inline-flex items-center justify-center hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:bg-gray-200 disabled:text-gray-500 relative overflow-hidden"
+            className="bg-[#1e3a8a] text-white py-3 px-6 mr-4 rounded-lg text-sm font-semibold transition-all duration-300 inline-flex items-center justify-center hover:bg-[#2563eb] hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:bg-gray-200 disabled:text-gray-500 relative overflow-hidden"
           >
             {isSubmitting ? (
               <>

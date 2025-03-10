@@ -41,16 +41,17 @@ const OptionFilter = () => {
   };
 
   return (
-    <div className="glass-card rounded-xl p-8 mb-8 shadow-lg card-hover animate-slideInLeft">
-      <h2 className="text-dark font-bold mb-6 text-2xl relative inline-block">
+    <div className="bg-white rounded-xl p-8 mb-8 shadow-md transition-all duration-300 hover:shadow-lg hover:translate-y-[-4px] animate-slideInLeft group relative">
+      <div className="absolute top-0 left-0 w-full h-1 bg-[#1e3a8a] transform origin-left transition-transform scale-x-100"></div>
+      <h2 className="text-[#1e3a8a] font-bold mb-6 text-2xl relative inline-block group-hover:text-[#2563eb]">
         Filter Data
-        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-secondary rounded scale-x-60 origin-left transition-transform duration-300"></span>
+        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#2563eb] rounded scale-x-60 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
       </h2>
       <div className="flex gap-4 items-center flex-wrap mb-4">
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
-          className="w-full flex-1 min-w-[150px] p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-light hover:border-primary focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15"
+          className="w-full flex-1 min-w-[150px] p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-white hover:border-[#2563eb] focus:outline-none focus:border-[#1e3a8a] focus:ring-3 focus:ring-[#1e3a8a]/15"
         >
           <option value="">Select Filter Type</option>
           <option value="ticker">By Ticker</option>
@@ -69,13 +70,13 @@ const OptionFilter = () => {
               : 'Select filter type first'
           }
           disabled={!filterType}
-          className="w-full flex-1 min-w-[150px] p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-light hover:border-primary focus:outline-none focus:border-primary focus:ring-3 focus:ring-primary/15 disabled:bg-gray-100 disabled:text-gray-400"
+          className="w-full flex-1 min-w-[150px] p-3 border border-gray-200 rounded-lg text-base transition-all duration-300 bg-white hover:border-[#2563eb] focus:outline-none focus:border-[#1e3a8a] focus:ring-3 focus:ring-[#1e3a8a]/15 disabled:bg-gray-100 disabled:text-gray-400"
         />
         
         <button 
           onClick={handleApplyFilter} 
           disabled={!filterType || !filterValue || isFiltering}
-          className="bg-primary text-white py-3 px-6 mr-4 rounded-lg text-sm font-semibold transition-all duration-300 inline-flex items-center justify-center hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:bg-gray-200 disabled:text-gray-500"
+          className="bg-[#1e3a8a] text-white py-3 px-6 mr-4 rounded-lg text-sm font-semibold transition-all duration-300 inline-flex items-center justify-center hover:bg-[#2563eb] hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 disabled:bg-gray-200 disabled:text-gray-500"
         >
           {isFiltering ? (
             <>
