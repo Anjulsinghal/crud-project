@@ -1,4 +1,5 @@
 import React from 'react';
+import { Eye, Edit, Trash2 } from 'lucide-react';
 
 // Sample data - you can replace this with your actual data source
 const exchangesData = [
@@ -18,12 +19,12 @@ const ExchangesTable = () => {
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-blue-900 text-white">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exchange Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expiry Time</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Exchange Name</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Expiry Time</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -33,8 +34,17 @@ const ExchangesTable = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exchange.value}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{exchange.expiryTime}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <button className="text-blue-600 hover:text-blue-800 mr-3">Edit</button>
-                  <button className="text-red-600 hover:text-red-800">Delete</button>
+                  <div className="flex">
+                    <button className="text-blue-600 hover:text-blue-800 mr-2">
+                      <Eye size={18} />
+                    </button>
+                    <button className="text-gray-600 hover:text-gray-800 mr-2">
+                      <Edit size={18} />
+                    </button>
+                    <button className="text-red-600 hover:text-red-800">
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
