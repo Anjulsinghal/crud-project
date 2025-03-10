@@ -1,11 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Bell, User, Menu, X, BarChart2, Database, Settings, HelpCircle, LogOut, Search, Eye, Edit, Trash2, FileText } from 'lucide-react';
 import ScriptsTable from '../components/ScriptsTable';
 import ExchangesTable from '../components/ExchangesTable';
 import DashboardStats from '../components/DashboardStats';
 
+
+
+
 const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef(null);
+
+  // Handle clicks outside the search box
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setSearchOpen(false);
+      }
+    }
+
+    // Add event listener when search is open
+    if (searchOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchOpen]);
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -51,27 +75,54 @@ const AdminDashboard = () => {
         <header className="bg-blue-900 shadow-md text-white">
           <div className="flex items-center justify-between px-6 py-4">
             <div className="flex items-center">
-              <button className="md:hidden mr-4" onClick={() => setSidebarOpen(true)}>
+              <button
+                className="md:hidden mr-4 hover:bg-blue-800 p-1 rounded-full transition-colors duration-200"
+                onClick={() => setSidebarOpen(true)}
+              >
                 <Menu size={24} />
               </button>
               <h1 className="text-xl font-bold">Dashboard</h1>
             </div>
             <div className="flex items-center">
-              <div className="relative mr-4">
-                <input 
-                  type="text" 
-                  placeholder="Search..." 
-                  className="rounded-md px-4 py-2 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white"
-                />
-                <Search className="absolute right-3 top-2.5 text-white" size={20} />
+              {/* Mobile search */}
+              <div className="md:hidden" ref={searchRef}>
+                <div className={`flex items-center transition-all duration-300 ease-in-out ${searchOpen ? 'w-36 opacity-100' : 'w-0 opacity-0'}`}>
+                  {searchOpen && (
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      className="rounded-md px-3 py-1 w-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 text-sm transition-all duration-200"
+                      autoFocus
+                    />
+                  )}
+                </div>
+                {!searchOpen && (
+                  <button
+                    onClick={() => setSearchOpen(true)}
+                    className="mr-4 hover:bg-blue-800 p-1 rounded-full transition-colors duration-200"
+                  >
+                    <Search size={20} />
+                  </button>
+                )}
               </div>
-              <button className="relative mr-4">
+
+              {/* Desktop search box - only visible on md and larger screens */}
+              <div className="hidden md:block relative mr-4 group">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="rounded-md px-4 py-2 pr-10 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 group-hover:ring-1 group-hover:ring-blue-400 transition-all duration-200"
+                />
+                <Search className="absolute right-3 top-2.5 text-gray-500" size={20} />
+              </div>
+
+              <button className="relative mr-4 hover:bg-blue-800 p-1 rounded-full transition-colors duration-200">
                 <Bell size={20} />
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">5</span>
               </button>
-              <div className="flex items-center">
-                <div className="h-8 w-8 rounded-full bg-white text-blue-900 flex items-center justify-center font-bold mr-2">A</div>
-                <span className="hidden md:inline">Admin User</span>
+              <div className="flex items-center group cursor-pointer">
+                <div className="h-8 w-8 rounded-full bg-white text-blue-900 flex items-center justify-center font-bold mr-2 group-hover:ring-2 group-hover:ring-blue-400 transition-all duration-200">A</div>
+                <span className="hidden md:inline group-hover:underline">Admin User</span>
               </div>
             </div>
           </div>
@@ -80,15 +131,15 @@ const AdminDashboard = () => {
         {/* Main Content */}
         <main className="p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard Overview</h1>
-          
+
           {/* Dashboard Stats */}
           <DashboardStats />
-          
+
           {/* Scripts Table */}
           <div className="mb-6">
             <ScriptsTable />
           </div>
-          
+
           {/* Exchanges Table */}
           <div className="mb-6">
             <ExchangesTable />
