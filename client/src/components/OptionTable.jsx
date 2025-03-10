@@ -34,7 +34,7 @@ const OptionTable = ({ onEditRecord }) => {
   const tableHeaders = ["Ticker", "Date", "Time", "Open", "High", "Low", "Close", "Volume", "OI", "Actions"];
 
   return (
-    <div className="overflow-x-auto table-wrapper">
+    <div className="overflow-x-auto ">
       <table className="w-full border-separate border-spacing-0 mt-6 overflow-hidden shadow-lg">
         <thead>
           <tr>

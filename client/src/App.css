@@ -60,7 +60,7 @@
 
 .gradient-text {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -133,12 +133,6 @@
 
 .animate-delayed {
   animation-delay: 0.2s;
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #1e3a8a, #2563eb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 /* Add glass-like effect */
